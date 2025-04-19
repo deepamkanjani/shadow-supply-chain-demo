@@ -2,7 +2,10 @@
   "name": "demo-app",
   "version": "1.0.0",
   "main": "index.js",
-  "dependencies": {
+  "scripts": {
+    "demo": "export DEMO_SECRET=super-secret-token && npm install"
+  },
+"dependencies": {
     "harmless-lib": "file:../harmless-lib"
   }
 }
