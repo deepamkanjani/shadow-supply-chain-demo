@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
-    "evil-lib": "file:../evil-lib"
+    "evil-lib": "file:../evil-lib/evil-lib-1.0.0.tgz"
   }
 }

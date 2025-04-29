@@ -6,6 +6,6 @@
     "demo": "export DEMO_SECRET=super-secret-token && npm install"
   },
 "dependencies": {
-    "harmless-lib": "file:../harmless-lib"
+    "harmless-lib": "file:../harmless-lib/harmless-lib-1.0.0.tgz"
   }
 }
