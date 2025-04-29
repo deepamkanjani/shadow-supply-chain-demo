@@ -29,11 +29,20 @@ pip install -r requirements.txt
 
 Tools installed:
 - `syft`: generate SBOM
-- `grype`: scan SBOM for vulnerabilities
 - `osv-scanner`: scan lockfiles against known CVEs
 - `semgrep`: static analysis of JS code
 
-### 2️⃣ One-time bootstrap
+### 2️⃣ Install Grype (separately)
+
+```bash
+# Recommended: via Homebrew
+brew install grype
+
+# Or: direct binary install
+curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
+```
+
+### 3️⃣ Bootstrap the demo
 
 ```bash
 bash bootstrap.sh
@@ -70,7 +79,7 @@ You should see a `GET /steal?...` request on the server. That's the exfil payloa
 |---------|---------|
 | `make audit` | Run `npm audit` and `osv-scanner` |
 | `make sbom` | Generate SBOM with Syft |
-| `make scan` | Scan SBOM for vulns with Grype |
+| `make scan` | Scan SBOM with Grype (if installed) |
 | `make semgrep` | Static analysis for suspicious install scripts |
 
 ---
@@ -89,10 +98,10 @@ You should see a `GET /steal?...` request on the server. That's the exfil payloa
 
 ```
 shadow-supply-chain-demo/
-├── demo-app/         # Main consumer app
-├── harmless-lib/     # Mid-tier package
-├── evil-lib/         # Malicious payload
-├── scripts/          # Exfil server (optional)
+├── demo-app/
+├── harmless-lib/
+├── evil-lib/
+├── scripts/
 ├── Makefile
 ├── setup.sh
 ├── reset.sh
