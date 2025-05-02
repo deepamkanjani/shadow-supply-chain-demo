@@ -20,10 +20,15 @@ sbom:
 	syft demo-app/. > demo-app-sbom.json || true
 
 scan:
+	syft dir:demo-app -o cyclonedx-json > demo-app-syft.sbom.json
+	[ -f demo-app-syft.sbom.json ] && echo "✅ SBOM generated" || (echo "❌ SBOM missing" && exit 1)
+	sbomasm assemble -c sbomasm-config.yaml ./demo-app-syft.sbom.json ./dummy-empty.sbom.json
+	syft dir:demo-app -o cyclonedx-json > demo-app-sbom.json
 	grype demo-app-sbom.json || true
 
-semgrep:
-	semgrep --config auto demo-app/ || true
+sempgrep:
+	@echo "[semgrep] Running static analysis on demo-app..."
+	semgrep scan --config auto demo-app/ || true
 
 simulate:
 	cd demo-app && rm -rf node_modules package-lock.json && npm install

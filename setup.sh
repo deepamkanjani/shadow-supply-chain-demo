@@ -29,3 +29,19 @@ cd demo-app
 npm install
 
 echo "[✓] Setup complete. Now run the exfil server and then 'npm install' again in demo-app if needed."
+
+
+# Set DEMO_SECRET environment variable for demo safety
+export DEMO_SECRET="somethingsupersecret$(scutil --get ComputerName)"
+echo "[setup] DEMO_SECRET set for demo: $DEMO_SECRET"
+
+
+# Ensure sbomasm is installed or notify user
+if ! command -v sbomasm &> /dev/null
+then
+  echo "[setup] ⚠️ sbomasm not found in PATH."
+  echo "[setup] You can install it using:"
+  echo "  brew install interlynk-io/sbomasm/sbomasm"
+  echo "  OR manually download it from: https://github.com/interlynk-io/sbomasm/releases"
+  exit 1
+fi

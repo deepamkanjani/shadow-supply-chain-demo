@@ -1,0 +1,11 @@
+input:
+  - path: demo-app-syft.sbom.json
+
+output:
+  path: demo-app-sbom.json
+  format: cyclonedx-json
+
+app:
+  name: "Demo App"
+  version: "1.0.0"
+  description: "Demo App"

